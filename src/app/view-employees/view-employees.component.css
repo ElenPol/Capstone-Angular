@@ -5,11 +5,19 @@
     height: 1000px;
 }
 
+.container2{
+    max-height: 735px;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 14%;
+}
+
 mat-form-field{
     background-color: white;
    height: 125px;
-    width:830px;
-    
+    width:830px;  
 }
 
 textarea{
@@ -43,9 +51,24 @@ textarea.mat-input-element {
 .mat-card-buttons{
     background-color: white;
     width: 80px;
-    height: 80px;
+    margin: 5px;
 }
 
 .mat-card-buttons:hover{
     background-color: bisque
+}
+
+.info-wrapper{
+    flex: auto;
+}
+
+.button-wrapper{
+    display: inline-grid;
+    margin-right: 10%;
+}
+
+.mat-card-sm-image {
+    width: 80px;
+    height: 80px;
+    margin: 0 10% 0 10%;
 }
