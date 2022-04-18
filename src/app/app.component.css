@@ -1,0 +1,36 @@
+.menu-button{
+    margin-right: 10px;
+    float:left;
+    height: 60px;
+    width: 60px;
+    background-color: gray;
+}
+
+mat-toolbar{
+    background-color: blueviolet;
+}
+
+a{
+    text-decoration: none;
+    color:white;
+    float: right;
+    margin: 30px;
+}
+
+.title:hover, a:hover {
+    color: bisque;
+}
+
+h1{
+    font-size: 48px;
+    color: white;
+}
+
+.container{
+    background-color: blueviolet;
+}
+
+.toolbar-items{
+    flex:auto;
+}
+

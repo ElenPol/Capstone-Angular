@@ -1,0 +1,51 @@
+.container{
+    background-size: cover;
+    background-position: center;
+    opacity: 80%;
+    height: 1000px;
+}
+
+mat-form-field{
+    background-color: white;
+   height: 125px;
+    width:830px;
+    
+}
+
+textarea{
+    font-size: x-large;
+}
+
+.search-form{
+    margin:0;
+   
+    margin-left: 25%;
+    padding-top: 50px;
+
+}
+
+.search-label{
+    font-size: x-large;
+}
+
+textarea.mat-input-element {
+    padding-bottom: 0;
+    padding-top: 25px;
+}
+
+.employee-card{
+    width: 800px;
+    height: 80px;
+    margin-top:10px;
+    margin-left: 25%;
+}
+
+.mat-card-buttons{
+    background-color: white;
+    width: 80px;
+    height: 80px;
+}
+
+.mat-card-buttons:hover{
+    background-color: bisque
+}

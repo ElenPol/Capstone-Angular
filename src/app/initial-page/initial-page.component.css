@@ -1,0 +1,46 @@
+.cont-left{
+    background-size: cover;
+    background-position: center;
+    float: left;
+    height: 1000px;
+    width:50%;
+    opacity: 60%;
+    position: relative;
+}
+
+.cont-right{
+    background-size: cover;
+    background-position: center;
+    float:right;
+    height: 1000px;
+    width:50%;
+    opacity: 60%;
+    position: relative;
+    
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    justify-content: center;
+}
+
+button{
+    font-size: x-large;
+    width: 200px;
+    height: 80px;
+    margin-left: 180%;
+    border-radius: 5%;
+    border-color: blueviolet;
+    border-width: 3px;
+}
+
+button:hover{
+    background-color: bisque;
+}
+
+
+
