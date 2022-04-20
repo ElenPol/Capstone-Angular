@@ -9,15 +9,22 @@ import { EmployeesList } from './employee-list';
 })
 export class EmployeeService {
   private apiUrl = 'api/view-employees';
+  private EmplList: Employee[] = [];
 
   constructor(private http: HttpClient) { }
 
-  /** GET heroes from the server */
+  
+  getEmployee(id: number): Observable<Employee> {
+    const empl = EmployeesList.find(h => h.id === id)!;
+    return of(empl);
+  }
+
+  
   getEmployees(): Observable<Employee[]> {
     return of(EmployeesList);
   }
 
-  /* GET heroes whose name contains search term */
+  
   searchEmployees(term: string): Observable<Employee[]> {
     return this.getEmployees().pipe(
       map((employees) =>
@@ -27,4 +34,6 @@ export class EmployeeService {
       )
     );
   }
+
+
 }

@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>Assign a device to an employee</h1>
+    
+        <form class="assign-form">
+            <mat-form-field class="assign-full-width" appearance="fill">
+              <mat-label>Choose Employee</mat-label>
+              <input type="text"
+                     placeholder="Enter the id of an employee"
+                     aria-label="Number"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto"
+                     required>
+              <mat-error *ngIf="myControl.invalid">{{getErrorMessageEmpl()}}</mat-error>
+              <mat-autocomplete #auto="matAutocomplete" >
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="onSelectEmpl(option)">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+          <mat-label class="info-label" *ngIf="employee">{{employee.name}}</mat-label>
+          
+        <form class="assign-form">
+            <mat-form-field class="assign-full-width" appearance="fill">
+              <mat-label>Choose Device</mat-label>
+              <input type="text"
+                     placeholder="Enter the serial number of a device"
+                     aria-label="Number"
+                     matInput
+                     [formControl]="myControl2"
+                     [matAutocomplete]="auto2">
+              <mat-error *ngIf="myControl2.invalid">{{getErrorMessageDev()}}</mat-error>
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let option2 of filteredOptions2 | async" [value]="option2" (onSelectionChange)="onSelectDev(option2)">
+                  {{option2}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+          <mat-label class="info-label" *ngIf="device">{{device.description}}</mat-label>
+    <button mat-raised-button (click)="update()">Assign</button>
+
+</div>
+
+

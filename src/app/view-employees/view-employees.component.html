@@ -6,20 +6,22 @@
             <textarea matInput #searchBox (input)="search(searchBox.value)" placeholder="Ex. Papadopoulos Giorgos"></textarea>
             </mat-form-field>
         </form>
-  <div class="container2">
-      <mat-card class="employee-card" *ngFor="let empl of employees$ | async">
+
+     <div class="container2">
+       <mat-card class="employee-card" *ngFor="let empl of employees$ | async">
           <mat-card-title-group >
             <div class="info-wrapper">
               <mat-card-title>{{empl.name}}</mat-card-title>
               <mat-card-subtitle *ngIf="empl.email">{{empl.email}}</mat-card-subtitle>
             </div>
             <div class="button-wrapper">
-              <button mat-raised-button class="mat-card-buttons" routerLink="/detail-employee/{{empl.id}}">Update</button>
-             <button mat-raised-button class="mat-card-buttons" routerLink="/...">Devices</button>
+              <button mat-raised-button class="mat-card-buttons" routerLink="/employee-detail">Update</button>
+             <button mat-raised-button class="mat-card-buttons" routerLink="/empl-devices">Devices</button>
             </div>
 
             <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
           </mat-card-title-group>
         </mat-card>
- 
+      </div>
 </div>
+

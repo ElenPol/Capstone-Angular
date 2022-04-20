@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
+import { EmployeesList } from '../employee-list';
 
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
@@ -15,8 +16,9 @@ import { EmployeeService } from '../employee.service';
 export class ViewEmployeesComponent implements OnInit {
   employees$!: Observable<Employee[]>;
   private searchTerms = new Subject<string>();
-  
-  constructor(private employeeService: EmployeeService) { }
+  employeesList = EmployeesList;
+
+  constructor(public employeeService: EmployeeService) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -35,5 +37,13 @@ export class ViewEmployeesComponent implements OnInit {
       switchMap((term: string) => this.employeeService.searchEmployees(term)),
     );
   }
+
+  OnInit(){
+    this.employees$ = this.employeeService.getEmployees();
+  }
+
+  
+
+ 
 
 }

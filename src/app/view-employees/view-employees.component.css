@@ -1,4 +1,7 @@
 .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-size: cover;
     background-position: center;
     opacity: 80%;
@@ -6,12 +9,14 @@
 }
 
 .container2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-height: 735px;
     overflow: scroll;
     overflow-x: hidden;
     margin-top: 10px;
-    margin-left: 5%;
-    margin-right: 14%;
+    margin-left: 20px;
 }
 
 mat-form-field{
@@ -20,20 +25,17 @@ mat-form-field{
     width:830px;  
 }
 
+.search-label{
+    font-size: x-large;
+}
+
 textarea{
     font-size: x-large;
 }
 
 .search-form{
     margin:0;
-   
-    margin-left: 25%;
     padding-top: 50px;
-
-}
-
-.search-label{
-    font-size: x-large;
 }
 
 textarea.mat-input-element {
@@ -45,7 +47,6 @@ textarea.mat-input-element {
     width: 800px;
     height: 80px;
     margin-top:10px;
-    margin-left: 25%;
 }
 
 .mat-card-buttons{
@@ -64,7 +65,6 @@ textarea.mat-input-element {
 
 .button-wrapper{
     display: inline-grid;
-    margin-right: 10%;
 }
 
 .mat-card-sm-image {
