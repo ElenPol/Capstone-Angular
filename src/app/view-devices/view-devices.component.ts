@@ -11,6 +11,7 @@ import { DeviceService } from '../device.service';
 export class ViewDevicesComponent implements OnInit {
   devices$!: Observable<Device[]>;
   private searchTerms = new Subject<string>();
+  selectedDev?: Device;
 
   constructor(public deviceService: DeviceService) { }
 
@@ -30,6 +31,10 @@ export class ViewDevicesComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.deviceService.searchDevices(term)),
     );
+  }
+
+  onSelect(dev: Device): void {
+    this.selectedDev= dev;
   }
 
 }

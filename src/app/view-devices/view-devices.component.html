@@ -14,9 +14,11 @@
         <mat-card-title>{{dev.description}}</mat-card-title>
         <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
       </div>
-        <button mat-raised-button class="mat-card-buttons" routerLink="/...">Update</button>
+      <app-update-device [selectedDevice]="selectedDev"></app-update-device>
+        <button mat-raised-button class="mat-card-buttons"  (click)="onSelect(dev)">Update</button>
         
       </mat-card-title-group>
+      
     </mat-card>
   </div>
 </div>

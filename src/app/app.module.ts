@@ -14,6 +14,7 @@ import { NewDeviceComponent } from './new-device/new-device.component';
 import { AssignComponent, ConfirmationDialog } from './assign/assign.component';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
@@ -26,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
+import { UpdateDeviceComponent } from './update-device/update-device.component';
 
 
 
@@ -40,12 +42,19 @@ import {MatDialogModule} from '@angular/material/dialog';
     NewEmployeeComponent,
     NewDeviceComponent,
     AssignComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    UpdateDeviceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
 
     MatIconModule,
     MatMenuModule,

@@ -1,6 +1,6 @@
 import { Device } from './device';
 
-export const DevicesList: Device[] = [
+export let DevicesList: Device[] = [
   { serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 10 },
   { serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 0 },
   { serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 17 },

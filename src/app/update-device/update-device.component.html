@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="newDeviceForm" *ngIf="selectedDevice">
+        <mat-form-field appearance="fill">
+            <mat-label>Serial Number</mat-label>
+            <input matInput formControlName="serialNumber" placeholder="{{selectedDevice.serialNumber}}"> 
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option value="mobile">Mobile</mat-option>
+              <mat-option value="tablet">Tablet</mat-option>
+              <mat-option value="laptop">Laptop</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </form>
+          <button mat-raised-button (click)="update()">Done</button>
+      
+</div>
