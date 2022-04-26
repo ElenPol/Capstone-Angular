@@ -31,7 +31,7 @@ export class NewDeviceComponent implements OnInit {
         this.dev.type = 3;
       }
       this.dev.ownerId = 0;
-      this.deviceService.createDevice(this.dev);
+      this.deviceService.addDevice(this.dev);
 
   }
 }

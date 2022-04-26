@@ -7,7 +7,7 @@ import { Employee } from './employee';
 })
 export class InMemoryDataService implements InMemoryDbService{
   createDb(){
-    const devices= [
+    let devices= [
       { serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 10 },
       { serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 0 },
       { serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 17 },
@@ -21,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService{
       
     ];
 
-    const employees = [
+    let employees = [
       { id: 1, name: 'Grace Clemmitt', email: 'gclemmitt0@vk.com' },
       { id: 2, name: 'Prentiss Hildrew', email: 'phildrew1@cbsnews.com' },
       { id: 3, name: 'Nicol Kordovani', email: 'nkordovani2@ow.ly' },

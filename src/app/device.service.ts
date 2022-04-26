@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Device } from './device';
-import { map, Observable, of, tap } from 'rxjs';
-import devices from './devices.json';
+import { Observable, of} from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 
 
@@ -10,57 +10,63 @@ import devices from './devices.json';
   providedIn: 'root'
 })
 export class DeviceService {
-  private apiUrl = 'api/view-devices';
-  private deviceList: Device[] = [];
+  private apiUrl = 'api/devices';
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  constructor(private http: HttpClient) { 
-    for(let x in devices){
-      let dev = {
-        serialNumber : devices[x]["serialNumber"],
-        description : devices[x]["description"],
-        type : parseInt(devices[x]["type"]),
-        ownerId : parseInt(devices[x]["ownerId"])
-      }
-      this.deviceList.push(dev);
-    }
-  }
+  constructor(private http: HttpClient) {  }
   
-  getDevice(snum: string): Observable<Device> {
-    const empl = this.deviceList.find(sn => sn.serialNumber === snum)!;
-    return of(empl);
+  getDevice(id: number): Observable<Device> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Device>(url).pipe(
+      catchError(this.handleError<Device>(`getDevice id=${id}`))
+    );
   }
 
   
   getDevices(): Observable<Device[]> {
-    console.log(this.deviceList);
-    return of(this.deviceList);
+    return this.http.get<Device[]>(this.apiUrl).pipe(
+      catchError(this.handleError<Device[]>('getDevices', []))
+    );
   }
 
   
   searchDevices(term: string): Observable<Device[]> {
-    return this.getDevices().pipe(
-      map((devices) =>
-        devices.filter((dev) =>
-          dev.description.toLowerCase().includes(term.toLowerCase())
-        )
-      )
+    return this.http.get<Device[]>(`${this.apiUrl}/?description=${term}`).pipe(
+      catchError(this.handleError<Device[]>('searchDevices', []))
     );
   }
 
-  async createDevice(dev: Device){
-    //this.deviceList.push(dev);
-    var values = JSON.parse(JSON.stringify(devices));
-    values[devices.length] = {"serialNumber": "",  "description": "", "type": "", "ownerId": ""}
-    values[devices.length].serialNumber = dev.serialNumber;
-    values[devices.length].description = dev.description;
-    values[devices.length].type = dev.type.toString();
-    values[devices.length].ownerId = dev.ownerId.toString();
-    console.log(JSON.parse(JSON.stringify(values)));
-    
+  addDevice(dev: Device): Observable<Device>{
+    return this.http.post<Device>(this.apiUrl, dev, this.httpOptions).pipe(
+      catchError(this.handleError<Device>('addDevice'))
+    );
   }
 
-  updateDevice(dev: Device){
+  deleteEmployee(id: number): Observable<Device> {
+    const url = `${this.apiUrl}/${id}`;
 
+    return this.http.delete<Device>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Device>('deleteDevice'))
+    );
+  }
+
+  updateDevice(dev: Device): Observable<any> {
+    return this.http.put(this.apiUrl, dev, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateDevice'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+  
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+  
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
 

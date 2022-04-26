@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private apiUrl = 'api/view-employees';
+  private apiUrl = 'api/employees';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -36,8 +36,9 @@ export class EmployeeService {
     );
   }
 
-  addEmployee(Employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, Employee, this.httpOptions).pipe(
+  addEmployee(empl: Employee): Observable<Employee> {
+    console.log(empl.id, empl.name, empl.email);
+    return this.http.post<Employee>(this.apiUrl, empl, this.httpOptions).pipe(
       catchError(this.handleError<Employee>('addEmployee'))
     );
   }
