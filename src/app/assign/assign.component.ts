@@ -6,6 +6,8 @@ import { DevicesList } from '../device-list';
 import { Employee } from '../employee';
 import { Device } from '../device';
 import {MatDialog} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeviceService } from '../device.service';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class AssignComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
   filteredOptions2!: Observable<string[]>;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar, private deviceService: DeviceService) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -58,13 +60,21 @@ export class AssignComponent implements OnInit {
   onSelectDev(empl: string){
     this.device = DevicesList.find(x => x.serialNumber === empl);
   }
+  
   update(){
+    
     if (typeof this.employee!=='undefined' && typeof this.device!=='undefined'){
-       this.device.ownerId = this.employee.id;
-       DevicesList.push(this.device);
-       console.log(this.device);
-       this.openDialog();
+      this.device.ownerId = this.employee.id;
+      console.log(this.device.ownerId);
+      if (confirm("Are you sure?")){
+        this.deviceService.updateDevice(this.device).subscribe(() => {
+          this._snackBar.open('Device '+this.device?.serialNumber+' was succesfully assigned to '+this.employee?.name+'!', 'X')
+        });
+        
       }
+    }else{
+      this._snackBar.open('You have to insert values for all the fields', 'X');
+    }
     
   }
 

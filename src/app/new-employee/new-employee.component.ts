@@ -1,6 +1,6 @@
-import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
@@ -14,20 +14,27 @@ export class NewEmployeeComponent implements OnInit {
   name = new FormControl('', [Validators.required]);
   idNum = 200;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private _snackBar: MatSnackBar  ) { }
 
   ngOnInit(): void {
   }
   
   createEmployee(name: string, email: string){
-    this.idNum++;
-    const empl: Employee = {
-      id: this.idNum,
-      name: name,
-      email: email
-    };
-    this.employeeService.addEmployee(empl);
-    this.employeeService.getEmployees().forEach(values => {console.log(values.map(value => value.name))});
+    name = name.trim();
+    email = email.trim();
+    if (name!=='' && email!=='' && !this.email.hasError('email')){
+      this.idNum++;
+      const empl: Employee = {
+        id: this.idNum,
+        name: name,
+        email: email
+      };
+      this.employeeService.addEmployee(empl).subscribe((employee) => {
+        this._snackBar.open('Employee '+employee.name+' was succesfully created!', 'X')
+      });
+    }else{
+      this._snackBar.open('You have to insert correct values for all the fields', 'X')
+    }
   }
 
   getErrorMessageEmail() {

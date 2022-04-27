@@ -12,7 +12,8 @@ export class UpdateDeviceComponent implements OnInit {
   newDeviceForm = this.formBuilder.group({
     serialNumber: '',
     type: '',
-    description: ''
+    description: '',
+    ownerId: ''
   });
   @Input() selectedDevice?: Device;
 
@@ -22,9 +23,13 @@ export class UpdateDeviceComponent implements OnInit {
   }
 
   update(){
-    var div = document.getElementById("container") as HTMLDivElement;
-    div.style.visibility = "true";
-    div.style.height = "fit-content";
+    const dev: Device = {
+      serialNumber: '',
+      type: 0,
+      description: '',
+      ownerId: 0
+    };
+    this.deviceService.updateDevice(dev);
   }
 
 }

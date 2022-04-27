@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Device } from '../device';
+import { iconMap } from '../device-icon';
+import { DeviceService } from '../device.service';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-empl-devices',
@@ -7,11 +12,21 @@ import { Device } from '../device';
   styleUrls: ['./empl-devices.component.css']
 })
 export class EmplDevicesComponent implements OnInit {
-  dev: Device = {serialNumber: "AE1245AE", description: "Xiaomi 11t", type: 1, ownerId: 1};
-
-  constructor() { }
+  employee: Employee | undefined;
+  devices$!: Observable<Device[]>;
+  device: Device[] | undefined;
+  
+  constructor(private route: ActivatedRoute,
+    private deviceService: DeviceService,
+    private location: Location) { }
 
   ngOnInit(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.devices$ = this.deviceService.getDevicesOfEmployee(id);
+  }
+
+  getIcon(dev: Device): string | undefined{
+    return iconMap.get(dev.type);
   }
 
 }

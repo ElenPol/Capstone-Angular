@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
 
@@ -9,29 +10,49 @@ import { DeviceService } from '../device.service';
   styleUrls: ['./new-device.component.css']
 })
 export class NewDeviceComponent implements OnInit {
-  newDeviceForm = this.formBuilder.group({
-    serialNumber: '',
-    type: '',
-    description: ''
-  });
-  dev: Device = this.newDeviceForm.value;
+  serialNumber = new FormControl('', [Validators.required]);
+  type = new FormControl('', [Validators.required]);
+  description = new FormControl('', [Validators.required]);
 
-  constructor(private formBuilder: FormBuilder, private deviceService: DeviceService) { }
+  constructor( private deviceService: DeviceService, private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
   }
 
-  create(){
-     this.dev = this.newDeviceForm.value;
-      if (this.newDeviceForm.value.type.includes('mobile')){
-        this.dev.type = 1;
-      }else if (this.newDeviceForm.value.type.includes('tablet')){
-        this.dev.type = 2;
+  createDevice(serialNumber: string, type: string, description: string){
+    serialNumber = serialNumber.trim();
+    type = type.trim();
+    description = description.trim();
+    if (serialNumber!=='' && type!=='' && description!==''){
+      const dev: Device = {
+        serialNumber: serialNumber,
+        type: 0,
+        description: description,
+        ownerId: 0
+      };
+      if (type.includes('mobile')){
+        dev.type = 1;
+      }else if (type.includes('tablet')){
+        dev.type = 2;
       }else{
-        this.dev.type = 3;
+        dev.type = 3;
       }
-      this.dev.ownerId = 0;
-      this.deviceService.addDevice(this.dev);
+      this.deviceService.addDevice(dev).subscribe((device) => {
+        this._snackBar.open('Device '+device.serialNumber+' was succesfully created!', 'X')
+      });
+    }else{
+      this._snackBar.open('You have to insert values for all the fields', 'X')
+    }
 
+  }
+
+  getErrorMessageSerialNumber() {
+    return 'You must enter a value';
+  }
+  getErrorMessageType() {
+    return 'You must select a value: is the device a mobile, a tablet or a laptop?';
+  }
+  getErrorMessageDescription() {
+    return "You must enter a value, ex. device's brand, model etc.";
   }
 }

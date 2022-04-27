@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
+import { UpdateDeviceComponent } from '../update-device/update-device.component';
 
 @Component({
   selector: 'app-view-devices',
@@ -17,6 +18,7 @@ export class ViewDevicesComponent implements OnInit {
 
   // Push a search term into the observable stream.
   search(term: string): void {
+    term = term.trim();
     this.searchTerms.next(term);
   }
 
@@ -37,4 +39,7 @@ export class ViewDevicesComponent implements OnInit {
     this.selectedDev= dev;
   }
 
+  update(){
+    (document.getElementById('container3') as HTMLDivElement).style.visibility = 'visibile';
+  }
 }

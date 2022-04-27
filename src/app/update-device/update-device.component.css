@@ -1,5 +1,4 @@
-div{
-    visibility: hidden;
-    height: 0;
-    width: 450px;
+mat-form-field{
+    background-color: white;
+    margin-right: 10px;
 }

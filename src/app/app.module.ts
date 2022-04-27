@@ -12,6 +12,7 @@ import { EmplDevicesComponent } from './empl-devices/empl-devices.component';
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import { NewDeviceComponent } from './new-device/new-device.component';
 import { AssignComponent, ConfirmationDialog } from './assign/assign.component';
+import { UpdateDeviceComponent } from './update-device/update-device.component';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
@@ -27,7 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
-import { UpdateDeviceComponent } from './update-device/update-device.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditDeviceDialogComponent } from './edit-device-dialog/edit-device-dialog.component';
+import { EditEmployeeDialogComponent } from './edit-employee-dialog/edit-employee-dialog.component';
+
 
 
 
@@ -43,7 +47,9 @@ import { UpdateDeviceComponent } from './update-device/update-device.component';
     NewDeviceComponent,
     AssignComponent,
     ConfirmationDialog,
-    UpdateDeviceComponent
+    UpdateDeviceComponent,
+    EditDeviceDialogComponent,
+    EditEmployeeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,8 @@ import { UpdateDeviceComponent } from './update-device/update-device.component';
     FormsModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

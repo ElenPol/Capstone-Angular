@@ -14,9 +14,14 @@
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea matInput formControlName="description" placeholder="{{selectedDevice.description}}"></textarea>
           </mat-form-field>
-        </form>
+          <mat-form-field appearance="fill">
+            <mat-label>Owner</mat-label>
+            <input matInput formControlName="ownerId" placeholder="{{selectedDevice.ownerId}}"> 
+          </mat-form-field>
           <button mat-raised-button (click)="update()">Done</button>
+        </form>
+          
       
 </div>

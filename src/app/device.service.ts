@@ -44,8 +44,8 @@ export class DeviceService {
     );
   }
 
-  deleteEmployee(id: number): Observable<Device> {
-    const url = `${this.apiUrl}/${id}`;
+  deleteDevice(serialNumber: string): Observable<Device> {
+    const url = `${this.apiUrl}/${serialNumber}`;
 
     return this.http.delete<Device>(url, this.httpOptions).pipe(
       catchError(this.handleError<Device>('deleteDevice'))
@@ -55,6 +55,12 @@ export class DeviceService {
   updateDevice(dev: Device): Observable<any> {
     return this.http.put(this.apiUrl, dev, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateDevice'))
+    );
+  }
+
+  getDevicesOfEmployee(emplId: number): Observable<Device[]>{
+    return this.http.get<Device[]>(`${this.apiUrl}/?ownerId=${emplId}`).pipe(
+      catchError(this.handleError<Device[]>('getDevicesOfEmployee', []))
     );
   }
 

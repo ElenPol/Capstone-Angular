@@ -3,10 +3,10 @@
 <h1>Devices of ...</h1>
 
 <mat-card class="device-card">
-    <mat-card-title-group>
+    <mat-card-title-group *ngFor="let dev of devices$ | async">
       <mat-card-title *ngIf="dev.description">{{dev.description}}</mat-card-title>
       <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
-      <mat-icon>mobile_friendly</mat-icon>
+      <mat-icon>{{getIcon(dev)}}</mat-icon>
       <button mat-raised-button class="mat-card-buttons" routerLink="/...">Unassign</button>
       
     </mat-card-title-group>
