@@ -1,32 +1,20 @@
-<h2 mat-dialog-title>Edit Device</h2>
+<div class="container">
+  <h2 mat-dialog-title>{{title}}</h2>
+  <h4 mat-dialog-subtitle>with serial number: {{dev.serialNumber}}</h4>
 
-<mat-dialog-content [formGroup]="form">
-  
-    <mat-form-field appearance="fill">
-        <mat-label>Serial Number</mat-label>
-        <input matInput formControlName="serialNumber" placeholder=""> 
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Type</mat-label>
-        <mat-select formControlName="type">
-          <mat-option value="mobile">Mobile</mat-option>
-          <mat-option value="tablet">Tablet</mat-option>
-          <mat-option value="laptop">Laptop</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" placeholder=""></textarea>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Owner</mat-label>
-        <input matInput formControlName="ownerId" placeholder=""> 
-      </mat-form-field>
+  <mat-dialog-content [formGroup]="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"  [(ngModel)]="descriptionValue"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Owner</mat-label>
+          <input matInput formControlName="ownerId"  [(ngModel)]="ownerValue"> 
+        </mat-form-field>
+  </mat-dialog-content>
 
- 
-</mat-dialog-content>
-
-<mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+      <button class="mat-raised-button" mat-dialog-close>Close</button>
+      <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>

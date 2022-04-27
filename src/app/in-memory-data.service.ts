@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Device } from './device';
 import { Employee } from './employee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InMemoryDataService implements InMemoryDbService{
+  
   createDb(){
     let devices= [
-      { serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 10 },
-      { serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 0 },
-      { serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 17 },
-      { serialNumber:'AS779005GT', description: 'Asus i7', type:3, ownerId: 33 },
-      { serialNumber:'AS774675ZZ', description: 'Asus i5', type:3, ownerId: 50 },
-      { serialNumber:'WW774675ZZ', description: 'iPad 10', type:2, ownerId: 0 },
-      { serialNumber:'WW884675ZZ', description: 'iPad 11', type:2, ownerId: 12  },
-      { serialNumber:'WW994675ZZ', description: 'Samsung 10', type:2, ownerId: 17 },
-      { serialNumber:'CC884675ZZ', description: 'Xiaomi 11t', type:1, ownerId: 10 },
-      { serialNumber:'CC004675ZZ', description: 'Samsung S9', type:1, ownerId: 50 },
+      { id: 1, serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 10 },
+      { id: 2, serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 0 },
+      { id: 3, serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 17 },
+      { id: 4, serialNumber:'AS779005GT', description: 'Asus i7', type:3, ownerId: 33 },
+      { id: 5, serialNumber:'AS774675ZZ', description: 'Asus i5', type:3, ownerId: 50 },
+      { id: 6, serialNumber:'WW774675ZZ', description: 'iPad 10', type:2, ownerId: 0 },
+      { id: 7, serialNumber:'WW884675ZZ', description: 'iPad 11', type:2, ownerId: 12  },
+      { id: 8, serialNumber:'WW994675ZZ', description: 'Samsung 10', type:2, ownerId: 17 },
+      { id: 9, serialNumber:'CC884675ZZ', description: 'Xiaomi 11t', type:1, ownerId: 10 },
+      { id: 10, serialNumber:'CC004675ZZ', description: 'Samsung S9', type:1, ownerId: 50 },
       
     ];
 
@@ -259,6 +261,11 @@ export class InMemoryDataService implements InMemoryDbService{
     genId(employees: Employee[]): number {
       return employees.length > 0 ? Math.max(...employees.map(empl => empl.id)) + 1 : 200;
     }
+
+    genDeviceId(devices: Device[]): number {
+      return devices.length > 0 ? Math.max(...devices.map(dev => dev.id)) + 1 : 200;
+    }
+    
 }
 
       

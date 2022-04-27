@@ -9,19 +9,16 @@
   <div class="container2">
     <mat-card class="device-card" *ngFor="let dev of devices$ | async">
       <mat-card-title-group >
-        <mat-icon>mobile_friendly</mat-icon>
+        <mat-icon>{{getIcon(dev.type)}}</mat-icon>
         <div>
         <mat-card-title>{{dev.description}}</mat-card-title>
         <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
       </div>
       
-        <button mat-raised-button class="mat-card-buttons"  (click)="onSelect(dev)">Update</button>
+        <button mat-raised-button class="mat-card-buttons"  (click)="update(dev)">Update</button>
         
       </mat-card-title-group>
       
     </mat-card>
   </div>
-  <div id="container3">
-  <app-update-device #updateDev [selectedDevice]="selectedDev"></app-update-device>
-</div>
 </div>

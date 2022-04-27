@@ -16,8 +16,9 @@ export class EditEmployeeDialogComponent implements OnInit {
     email:''
   });
   empl:Employee;
+  
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<EditEmployeeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.empl = data.employee;
     }
 

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
 import { Device } from '../device';
+import { iconMap } from '../device-icon';
 import { DeviceService } from '../device.service';
+import { EditDeviceDialogComponent } from '../edit-device-dialog/edit-device-dialog.component';
 import { UpdateDeviceComponent } from '../update-device/update-device.component';
 
 @Component({
@@ -12,9 +16,8 @@ import { UpdateDeviceComponent } from '../update-device/update-device.component'
 export class ViewDevicesComponent implements OnInit {
   devices$!: Observable<Device[]>;
   private searchTerms = new Subject<string>();
-  selectedDev?: Device;
 
-  constructor(public deviceService: DeviceService) { }
+  constructor(public deviceService: DeviceService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -35,11 +38,21 @@ export class ViewDevicesComponent implements OnInit {
     );
   }
 
-  onSelect(dev: Device): void {
-    this.selectedDev= dev;
+  update(dev: Device){
+    const dialogRef = this.dialog.open(EditDeviceDialogComponent, {
+      data: {device: dev}, });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      dev = result;
+      console.log(dev.serialNumber, dev.description, dev.ownerId, dev.type);
+      this.deviceService.updateDevice(dev).subscribe(() => {
+        this._snackBar.open('Device '+dev.serialNumber+' was succesfully updated!', 'X')
+      });
+    });
+    
   }
 
-  update(){
-    (document.getElementById('container3') as HTMLDivElement).style.visibility = 'visibile';
+  getIcon(num: number){
+    return iconMap.get(num);
   }
 }

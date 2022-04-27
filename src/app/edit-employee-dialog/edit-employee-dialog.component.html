@@ -1,24 +1,22 @@
-<h2 mat-dialog-title>Edit Employee</h2>
+<div class="container">
+  <h2 mat-dialog-title>Edit Employee</h2>
+  <h4 mat-dialog-subtitle>with id: {{empl.id}}</h4>
 
-<mat-dialog-content [formGroup]="form">
-    <mat-form-field appearance="fill">
-      <mat-label>Id</mat-label>
-      <input matInput placeholder="" >
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="ex. Giorgos Papadopoulos" >
-      </mat-form-field>
+  <mat-dialog-content [formGroup]="form">
+      
       <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="ex. gpap@example.com" [formControl]="email" >
-      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-      </mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput value="{{empl.name}}" >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput value="{{empl.email}}" [formControl]="email" >
+        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+        </mat-form-field>
+  </mat-dialog-content>
 
- 
-</mat-dialog-content>
-
-<mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
-</mat-dialog-actions>
+  <mat-dialog-actions>
+      <button class="mat-raised-button"(click)="close()">Close</button>
+      <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>
