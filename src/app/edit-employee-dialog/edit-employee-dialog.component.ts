@@ -10,27 +10,28 @@ import { Employee } from '../employee';
 })
 export class EditEmployeeDialogComponent implements OnInit {
   email = new FormControl('', [Validators.email]);
-  form = this.formBuilder.group({
-    id:'',
-    name:'',
-    email:''
-  });
+  emailValue: string;
+  nameValue: string;
   empl:Employee;
-  
+
   constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<EditEmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.empl = data.employee;
+      this.emailValue = this.empl.email;
+      this.nameValue = this.empl.name;
     }
 
   ngOnInit(){
   }
 
-  close(){
-
-  }
-
   save(){
-
+    const empl: Employee = {
+      id: this.empl.id,
+      name: this.nameValue,
+      email: this.emailValue
+    };
+    
+    this.dialogRef.close(empl);
   }
 
   getErrorMessageEmail() {

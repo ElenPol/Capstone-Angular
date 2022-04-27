@@ -8,7 +8,7 @@ import { NewDeviceComponent } from './new-device/new-device.component';
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import { ViewDevicesComponent } from './view-devices/view-devices.component';
 import { ViewEmployeesComponent } from './view-employees/view-employees.component';
-import { UpdateDeviceComponent } from './update-device/update-device.component';
+
 
 
 const routes: Routes = [{ path: 'initial-page', component: InitialPageComponent },
@@ -19,8 +19,7 @@ const routes: Routes = [{ path: 'initial-page', component: InitialPageComponent 
                         { path: 'empl-devices', component: EmplDevicesComponent },
                         { path: 'new-device', component: NewDeviceComponent },
                         { path: 'new-employee', component: NewEmployeeComponent},
-                        { path: 'assign', component: AssignComponent},
-                        { path: 'update-device', component: UpdateDeviceComponent}];
+                        { path: 'assign', component: AssignComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

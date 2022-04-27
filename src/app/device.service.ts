@@ -53,7 +53,7 @@ export class DeviceService {
   }
 
   updateDevice(dev: Device): Observable<any> {
-    return this.http.put(this.apiUrl, dev, this.httpOptions).pipe(
+    return this.http.put(`${this.apiUrl}/${dev.id}`, dev, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateDevice'))
     );
   }

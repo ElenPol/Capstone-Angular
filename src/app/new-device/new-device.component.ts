@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
@@ -10,29 +10,31 @@ import { DeviceService } from '../device.service';
   styleUrls: ['./new-device.component.css']
 })
 export class NewDeviceComponent implements OnInit {
-  serialNumber = new FormControl('', [Validators.required]);
-  type = new FormControl('', [Validators.required]);
-  description = new FormControl('', [Validators.required]);
+  form = this.formBuilder.group({
+    serialNumber: ['', [Validators.required]],
+    type: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+  });
 
-  constructor( private deviceService: DeviceService, private _snackBar: MatSnackBar ) { }
+  constructor( private deviceService: DeviceService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
   }
 
-  createDevice(serialNumber: string, type: string, description: string){
-    serialNumber = serialNumber.trim();
-    type = type.trim();
-    description = description.trim();
+  createDevice(){
+    let serialNumber = this.form.value.serialNumber.trim();
+    let type = this.form.value.type.trim();
+    let description = this.form.value.description.trim();
     if (serialNumber!=='' && type!=='' && description!==''){
       const dev: Device = {
-        serialNumber: serialNumber,
+        serialNumber: this.form.value.serialNumber,
         type: 0,
-        description: description,
+        description: this.form.value.description,
         ownerId: 0
       };
-      if (type.includes('mobile')){
+      if (this.form.value.type.includes('mobile')){
         dev.type = 1;
-      }else if (type.includes('tablet')){
+      }else if (this.form.value.type.includes('tablet')){
         dev.type = 2;
       }else{
         dev.type = 3;

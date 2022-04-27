@@ -6,7 +6,7 @@ import { Device } from '../device';
 import { iconMap } from '../device-icon';
 import { DeviceService } from '../device.service';
 import { EditDeviceDialogComponent } from '../edit-device-dialog/edit-device-dialog.component';
-import { UpdateDeviceComponent } from '../update-device/update-device.component';
+
 
 @Component({
   selector: 'app-view-devices',
@@ -42,12 +42,14 @@ export class ViewDevicesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditDeviceDialogComponent, {
       data: {device: dev}, });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      dev = result;
-      console.log(dev.serialNumber, dev.description, dev.ownerId, dev.type);
-      this.deviceService.updateDevice(dev).subscribe(() => {
-        this._snackBar.open('Device '+dev.serialNumber+' was succesfully updated!', 'X')
-      });
+      //console.log('The dialog was closed');
+      console.log(JSON.stringify(dev));
+      console.log(JSON.stringify(result));
+      if (JSON.stringify(dev) !== JSON.stringify(result) ){
+        this.deviceService.updateDevice(result).subscribe(() => {
+          this._snackBar.open('Device '+dev.serialNumber+' was succesfully updated!', 'X')
+        });
+      }
     });
     
   }

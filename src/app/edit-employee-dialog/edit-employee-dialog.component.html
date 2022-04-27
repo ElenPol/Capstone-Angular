@@ -2,21 +2,21 @@
   <h2 mat-dialog-title>Edit Employee</h2>
   <h4 mat-dialog-subtitle>with id: {{empl.id}}</h4>
 
-  <mat-dialog-content [formGroup]="form">
+  <mat-dialog-content>
       
       <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input matInput value="{{empl.name}}" >
+          <input matInput [(ngModel)]="nameValue" >
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput value="{{empl.email}}" [formControl]="email" >
+          <input matInput [(ngModel)]="emailValue" [formControl]="email" >
         <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
         </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-      <button class="mat-raised-button"(click)="close()">Close</button>
+      <button class="mat-raised-button" mat-dialog-close >Close</button>
       <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
   </mat-dialog-actions>
 </div>

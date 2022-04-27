@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
@@ -17,7 +18,7 @@ export class ViewEmployeesComponent implements OnInit {
   employees$!: Observable<Employee[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(public employeeService: EmployeeService, private dialog: MatDialog) {  }
+  constructor(public employeeService: EmployeeService, private dialog: MatDialog, private _snackBar: MatSnackBar) {  }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -42,6 +43,15 @@ export class ViewEmployeesComponent implements OnInit {
   update(empl: Employee){
     const dialogRef = this.dialog.open(EditEmployeeDialogComponent, {
       data: {employee: empl}, });
+      dialogRef.afterClosed().subscribe(result => {
+        //console.log('The dialog was closed');
+        console.log(JSON.stringify(result));
+        if (JSON.stringify(result).trim().length !== 0 ){
+          this.employeeService.updateEmployee(result).subscribe(() => {
+            this._snackBar.open('Employee with id: '+empl.id+' was succesfully updated!', 'X')
+          });
+        }
+      });
   }
   
 

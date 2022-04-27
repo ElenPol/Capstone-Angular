@@ -17,8 +17,7 @@ export class EditDeviceDialogComponent implements OnInit {
   });
   dev:Device;
   title: string;
-  descriptionValue: string;
-  ownerValue: number;
+
   constructor( private formBuilder: FormBuilder,  public dialogRef: MatDialogRef<EditDeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.dev = data.device;
@@ -29,8 +28,10 @@ export class EditDeviceDialogComponent implements OnInit {
       }else{
         this.title = 'Edit Laptop';
       }
-      this.descriptionValue = this.dev.description;
-      this.ownerValue = this.dev.ownerId;
+      this.form.setValue({
+        description: this.dev.description,
+        ownerId: this.dev.ownerId.toString()
+      });
     }
 
   ngOnInit(): void {
@@ -41,16 +42,14 @@ export class EditDeviceDialogComponent implements OnInit {
       id: this.dev.id,
       serialNumber: this.dev.serialNumber,
       type: this.dev.type,
-      description: this.descriptionValue,
-      ownerId: this.ownerValue
+      description: this.form.value.description,
+      ownerId: parseInt(this.form.value.ownerId)
     };
     
     this.dialogRef.close(dev);
     
   }
   
-  getIcon(num: number){
-    return iconMap.get(num);
-  }
+  
 
 }
