@@ -34,6 +34,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {A11yModule} from '@angular/cdk/a11y';
 
 
 
@@ -79,7 +80,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatSnackBarModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    A11yModule
   ],
   providers: [],
   bootstrap: [AppComponent]

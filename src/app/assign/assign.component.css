@@ -13,14 +13,28 @@
   }
 
   mat-table{
-    width: 500px;
+    min-width: 800px;
     overflow: auto;
-    max-height: 500px;
+    max-height: 700px;
   }
 
   mat-paginator{
+    width: 800px;
+  }
+
+  .mat-row:hover{
+    background-color: blueviolet;
+    
+  }
+  .mat-row:hover > mat-cell{
+    color: white;
+    font-size: large;
+  }
+
+  mat-form-field{
     width: 500px;
   }
+
 
 
   
