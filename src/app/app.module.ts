@@ -11,7 +11,10 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 import { EmplDevicesComponent } from './empl-devices/empl-devices.component';
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import { NewDeviceComponent } from './new-device/new-device.component';
-import { AssignComponent, ConfirmationDialog } from './assign/assign.component';
+import { AssignComponent } from './assign/assign.component';
+import { EditDeviceDialogComponent } from './edit-device-dialog/edit-device-dialog.component';
+import { EditEmployeeDialogComponent } from './edit-employee-dialog/edit-employee-dialog.component';
+import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
@@ -28,8 +31,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { EditDeviceDialogComponent } from './edit-device-dialog/edit-device-dialog.component';
-import { EditEmployeeDialogComponent } from './edit-employee-dialog/edit-employee-dialog.component';
+import { MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -45,9 +49,9 @@ import { EditEmployeeDialogComponent } from './edit-employee-dialog/edit-employe
     NewEmployeeComponent,
     NewDeviceComponent,
     AssignComponent,
-    ConfirmationDialog,
     EditDeviceDialogComponent,
-    EditEmployeeDialogComponent
+    EditEmployeeDialogComponent,
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,10 @@ import { EditEmployeeDialogComponent } from './edit-employee-dialog/edit-employe
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

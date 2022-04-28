@@ -10,13 +10,14 @@
     <mat-card class="device-card" *ngFor="let dev of devices$ | async">
       <mat-card-title-group >
         <mat-icon>{{getIcon(dev.type)}}</mat-icon>
-        <div>
+        <div class="info-wrapper">
         <mat-card-title>{{dev.description}}</mat-card-title>
         <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
-      </div>
-      
+       </div>
+       <div class="button-wrapper">
         <button mat-raised-button class="mat-card-buttons"  (click)="update(dev)">Update</button>
-        
+        <button mat-raised-button class="mat-card-buttons" (click)="delete(dev)">Delete</button>
+      </div>
       </mat-card-title-group>
       
     </mat-card>

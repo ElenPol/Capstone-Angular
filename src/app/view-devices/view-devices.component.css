@@ -16,6 +16,7 @@
     overflow: scroll;
     overflow-x: hidden;
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 mat-form-field{
@@ -47,13 +48,14 @@ textarea.mat-input-element {
     width: 800px;
     height: 80px;
     margin-top:10px;
-    margin-left: 20px;
 }
 
 .mat-card-buttons{
     background-color: white;
     width: 80px;
-    height: 80px;
+    height: 50px;
+    margin-left:20px;
+    margin-right: 20px;
 }
 
 .mat-card-buttons:hover{
@@ -62,19 +64,16 @@ textarea.mat-input-element {
 
 .info-wrapper{
     flex: auto;
+    margin-left: 10px;
 }
 
 .button-wrapper{
-    display: inline-grid;
+    display: block;
 }
 
-.mat-card-sm-image {
-    width: 80px;
-    height: 80px;
-    margin: 0 10% 0 10%;
+mat-icon{
+    margin-left:20px;
+    margin-right: 20px;
 }
 
-.container3{
-    visibility:hidden;
-}
 

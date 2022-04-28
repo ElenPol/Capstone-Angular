@@ -5,6 +5,8 @@ import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { DeviceService } from '../device.service';
 import { EditEmployeeDialogComponent } from '../edit-employee-dialog/edit-employee-dialog.component';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
@@ -18,7 +20,7 @@ export class ViewEmployeesComponent implements OnInit {
   employees$!: Observable<Employee[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(public employeeService: EmployeeService, private dialog: MatDialog, private _snackBar: MatSnackBar) {  }
+  constructor(private employeeService: EmployeeService, private  deviceService: DeviceService, private dialog: MatDialog, private _snackBar: MatSnackBar) {  }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -52,6 +54,25 @@ export class ViewEmployeesComponent implements OnInit {
           });
         }
       });
+  }
+
+  delete(empl: Employee){
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      data: {flagConfDialog: false}, });
+      dialogRef.afterClosed().subscribe(result => {
+        //console.log(result);
+        let flag = result;
+        if (flag){
+          this.employeeService.deleteEmployee(empl.id).subscribe(() => {
+            this._snackBar.open('Employee with id: '+empl.id+' was succesfully deleted!', 'X')
+            this.deviceService.getDevicesOfEmployee(empl.id).subscribe((devices) => devices.forEach(d => {
+                d.ownerId = 0;
+                this.deviceService.updateDevice(d).subscribe(()=>console.log(d.ownerId));
+            }));
+          });
+        }
+      });
+
   }
   
 

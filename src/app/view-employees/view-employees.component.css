@@ -65,10 +65,11 @@ textarea.mat-input-element {
 
 .button-wrapper{
     display: inline-grid;
+    margin-right: 25px;
 }
 
 .mat-card-sm-image {
     width: 80px;
     height: 80px;
-    margin: 0 10% 0 10%;
+    margin: 0 5% 0 5%;
 }

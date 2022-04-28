@@ -44,8 +44,8 @@ export class DeviceService {
     );
   }
 
-  deleteDevice(serialNumber: string): Observable<Device> {
-    const url = `${this.apiUrl}/${serialNumber}`;
+  deleteDevice(id: number): Observable<Device> {
+    const url = `${this.apiUrl}/${id}`;
 
     return this.http.delete<Device>(url, this.httpOptions).pipe(
       catchError(this.handleError<Device>('deleteDevice'))

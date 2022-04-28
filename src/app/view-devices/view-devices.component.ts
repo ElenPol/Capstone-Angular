@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, distinctUntilChanged, Observable, Subject, switchMap } from 'rxjs';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { Device } from '../device';
 import { iconMap } from '../device-icon';
 import { DeviceService } from '../device.service';
@@ -56,5 +57,20 @@ export class ViewDevicesComponent implements OnInit {
 
   getIcon(num: number){
     return iconMap.get(num);
+  }
+
+  delete(dev:Device){
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      data: {flagConfDialog: false}, });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        let flag = result;
+        if (flag){
+          this.deviceService.deleteDevice(dev.id!).subscribe(() => {
+            this._snackBar.open('Device '+dev.serialNumber+' was succesfully deleted!', 'X')
+          });
+        }
+      });
+
   }
 }
