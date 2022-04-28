@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Choose the employee you want to assign a device to</h1>
+
+    <mat-form-field> <mat-label>Filter Employees</mat-label> <input matInput (keyup)="applyFilter($event)" #input> </mat-form-field>
+    
+    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by id"> Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell >
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by name"> Name </mat-header-cell>
+        <mat-cell class="name" *matCellDef="let element"> {{element.name}} </mat-cell >
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="onRowClicked(row)"></mat-row>
+    </mat-table>
+  
+    <mat-paginator
+                   [pageSizeOptions]="[20, 50, 100]">
+    </mat-paginator>
+    
+
+</div>
+
+

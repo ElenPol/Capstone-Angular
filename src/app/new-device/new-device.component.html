@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Create a new device</h1>
+  <form [formGroup]="form"> 
+  <mat-form-field appearance="fill">
+      <mat-label>Serial Number</mat-label>
+      <input matInput formControlName="serialNumber"  required> 
+      <mat-error *ngIf="form.value.serialNumber.invalid">{{getErrorMessageSerialNumber()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type"  required>
+        <mat-option value="mobile">Mobile</mat-option>
+        <mat-option value="tablet">Tablet</mat-option>
+        <mat-option value="laptop">Laptop</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.value.type.invalid">{{getErrorMessageType()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" required></textarea>
+      <mat-error *ngIf="form.value.description.invalid">{{getErrorMessageDescription()}}</mat-error>
+    </mat-form-field>
+  </form>
+    <button mat-raised-button (click)="createDevice()">Create</button>
+
+</div>

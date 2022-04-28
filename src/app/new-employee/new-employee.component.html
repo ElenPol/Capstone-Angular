@@ -1,0 +1,17 @@
+<div class="container">
+    <h1>Create a new employee</h1>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="ex. Giorgos Papadopoulos" [formControl]="name" required>
+        <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="ex. gpap@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button (click)="createEmployee(name.value, email.value)">Create</button>
+  
+  </div>

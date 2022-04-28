@@ -3,17 +3,23 @@
     <form class="search-form">    
         <mat-form-field class="example-full-width" appearance="fill">
         <mat-label class="search-label"><b>SEARCH</b></mat-label>
-        <textarea matInput placeholder="Ex. Xiaomi 11t"></textarea>
+        <textarea matInput #searchBox (input)="search(searchBox.value)" placeholder="Ex. Xiaomi 11t"></textarea>
         </mat-form-field>
     </form>
-
-<mat-card class="employee-card">
-    <mat-card-title-group>
-      <mat-card-title *ngIf="dev.description">{{dev.description}}</mat-card-title>
-      <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
-      <mat-icon>mobile_friendly</mat-icon>
-      <button mat-raised-button class="mat-card-buttons" routerLink="/...">Update</button>
+  <div class="container2">
+    <mat-card class="device-card" *ngFor="let dev of devices$ | async">
+      <mat-card-title-group >
+        <mat-icon>{{getIcon(dev.type)}}</mat-icon>
+        <div class="info-wrapper">
+        <mat-card-title>{{dev.description}}</mat-card-title>
+        <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
+       </div>
+       <div class="button-wrapper">
+        <button mat-raised-button class="mat-card-buttons"  (click)="update(dev)">Update</button>
+        <button mat-raised-button class="mat-card-buttons" (click)="delete(dev)">Delete</button>
+      </div>
+      </mat-card-title-group>
       
-    </mat-card-title-group>
-  </mat-card>
+    </mat-card>
+  </div>
 </div>

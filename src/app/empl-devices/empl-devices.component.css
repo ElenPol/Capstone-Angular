@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:bisque;
+    opacity: 80%;
+    height: 1000px;
+}
+
+mat-form-field{
+    background-color: white;
+   height: 125px;
+    width:830px;
+    
+}
+
+textarea.mat-input-element {
+    padding-bottom: 0;
+    padding-top: 25px;
+}
+
+.device-card{
+    width: 800px;
+    height: 80px;
+    top:10px;
+}
+
+.mat-card-buttons{
+    background-color: white;
+    width: 80px;
+    height: 80px;
+}
+
+.mat-card-buttons:hover{
+    background-color: bisque
+}
+
+h1{
+    margin:0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+}
