@@ -28,10 +28,15 @@ export class EditEmployeeDialogComponent implements OnInit {
     const empl: Employee = {
       id: this.empl.id,
       name: this.nameValue,
-      email: this.emailValue
+      email: this.emailValue,
+      devices: this.empl.devices
     };
     
     this.dialogRef.close(empl);
+  }
+
+  close(){
+    this.dialogRef.close();
   }
 
   getErrorMessageEmail() {

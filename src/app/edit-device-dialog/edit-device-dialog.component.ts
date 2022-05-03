@@ -49,6 +49,10 @@ export class EditDeviceDialogComponent implements OnInit {
     this.dialogRef.close(dev);
     
   }
+
+  close(){
+    this.dialogRef.close();
+  }
   
   
 

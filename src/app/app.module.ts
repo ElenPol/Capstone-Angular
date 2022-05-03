@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { InitialPageComponent } from './initial-page/initial-page.component';
 import { ViewEmployeesComponent } from './view-employees/view-employees.component';
 import { ViewDevicesComponent } from './view-devices/view-devices.component';
-import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmplDevicesComponent } from './empl-devices/empl-devices.component';
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import { NewDeviceComponent } from './new-device/new-device.component';
@@ -35,6 +34,7 @@ import { MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {A11yModule} from '@angular/cdk/a11y';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -45,7 +45,6 @@ import {A11yModule} from '@angular/cdk/a11y';
     InitialPageComponent,
     ViewEmployeesComponent,
     ViewDevicesComponent,
-    EmployeeDetailComponent,
     EmplDevicesComponent,
     NewEmployeeComponent,
     NewDeviceComponent,
@@ -81,7 +80,8 @@ import {A11yModule} from '@angular/cdk/a11y';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    A11yModule
+    A11yModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

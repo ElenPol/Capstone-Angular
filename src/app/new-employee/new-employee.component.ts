@@ -27,7 +27,8 @@ export class NewEmployeeComponent implements OnInit {
       const empl: Employee = {
         id: this.idNum,
         name: name,
-        email: email
+        email: email,
+        devices: []
       };
       this.employeeService.addEmployee(empl).subscribe((employee) => {
         this._snackBar.open('Employee '+employee.name+' was succesfully created!', 'X')

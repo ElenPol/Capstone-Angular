@@ -8,6 +8,7 @@ import {
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { DeviceService } from '../device.service';
 import { EditEmployeeDialogComponent } from '../edit-employee-dialog/edit-employee-dialog.component';
+import { EmplDevicesComponent } from '../empl-devices/empl-devices.component';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
@@ -46,9 +47,8 @@ export class ViewEmployeesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditEmployeeDialogComponent, {
       data: {employee: empl}, });
       dialogRef.afterClosed().subscribe(result => {
-        //console.log('The dialog was closed');
-        console.log(JSON.stringify(result));
-        if (JSON.stringify(result).trim().length !== 0 ){
+        //console.log(JSON.stringify(result));
+        if (typeof result != 'undefined'){
           this.employeeService.updateEmployee(result).subscribe(() => {
             this._snackBar.open('Employee with id: '+empl.id+' was succesfully updated!', 'X')
           });
@@ -73,6 +73,17 @@ export class ViewEmployeesComponent implements OnInit {
         }
       });
 
+  }
+
+  showDevices(empl: Employee){
+    const dialogRef = this.dialog.open(EmplDevicesComponent, {
+      data: {employee: empl}, });
+      dialogRef.afterClosed().subscribe(result => {
+        if (typeof result != 'undefined'){
+            this._snackBar.open('Assign to employee with id: '+result.id+'  was succesfully completed!', 'X')
+          };
+        }
+      );
   }
   
 

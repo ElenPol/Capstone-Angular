@@ -9,6 +9,7 @@ import { EmployeeService } from '../employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { EmplDevicesComponent } from '../empl-devices/empl-devices.component';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class AssignComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar, private deviceService: DeviceService, private employeeService: EmployeeService, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar, private deviceService: DeviceService, 
+    private employeeService: EmployeeService, private _liveAnnouncer: LiveAnnouncer) {
     
   }
 
@@ -37,7 +39,15 @@ export class AssignComponent implements OnInit {
   }
   
   onRowClicked(row: any) {
-    console.log('Row clicked: ', row);
+    //console.log('Row clicked: ', row);
+    const dialogRef = this.dialog.open(EmplDevicesComponent, {
+      data: {employee: row}, });
+      dialogRef.afterClosed().subscribe(result => {
+        if (typeof result != 'undefined'){
+            this._snackBar.open('Assign to employee with id: '+result.id+'  was succesfully completed!', 'X')
+          };
+        }
+      );
   }
 
    setTableDetails() {

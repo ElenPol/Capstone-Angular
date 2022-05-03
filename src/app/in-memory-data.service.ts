@@ -10,31 +10,35 @@ export class InMemoryDataService implements InMemoryDbService{
   
   createDb(){
     let devices= [
-      { id: 1, serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 10 },
-      { id: 2, serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 0 },
-      { id: 3, serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 17 },
-      { id: 4, serialNumber:'AS779005GT', description: 'Asus i7', type:3, ownerId: 33 },
-      { id: 5, serialNumber:'AS774675ZZ', description: 'Asus i5', type:3, ownerId: 50 },
-      { id: 6, serialNumber:'WW774675ZZ', description: 'iPad 10', type:2, ownerId: 0 },
-      { id: 7, serialNumber:'WW884675ZZ', description: 'iPad 11', type:2, ownerId: 12  },
-      { id: 8, serialNumber:'WW994675ZZ', description: 'Samsung 10', type:2, ownerId: 17 },
-      { id: 9, serialNumber:'CC884675ZZ', description: 'Xiaomi 11t', type:1, ownerId: 10 },
-      { id: 10, serialNumber:'CC004675ZZ', description: 'Samsung S9', type:1, ownerId: 50 },
-      
+      { id: 1, serialNumber:'AS774675GT', description: 'Asus i5', type:3, ownerId: 2, available: false },
+      { id: 2, serialNumber:'AS123175GT', description: 'Dell Vostro', type:3, ownerId: 5, available: true },
+      { id: 3, serialNumber:'AS770005GT', description: 'Dell Vostro', type:3, ownerId: 1, available: false },
+      { id: 4, serialNumber:'AS779005GT', description: 'Asus i7', type:3, ownerId: 6, available: false },
+      { id: 5, serialNumber:'AS774675ZZ', description: 'Asus i5', type:3, ownerId: 7, available: false },
+      { id: 6, serialNumber:'WW774675ZZ', description: 'iPad 10', type:2, ownerId: 1, available: true },
+      { id: 7, serialNumber:'WW884675ZZ', description: 'iPad 11', type:2, ownerId: 8, available: false  },
+      { id: 8, serialNumber:'WW994675ZZ', description: 'Samsung 10', type:2, ownerId: 9, available: false },
+      { id: 9, serialNumber:'CC884675ZZ', description: 'Xiaomi 11t', type:1, ownerId: 10, available: false },
+      { id: 10, serialNumber:'CC004675ZZ', description: 'Samsung S9', type:1, ownerId: 2, available: false },
+      { id: 11, serialNumber:'CC014675ZZ', description: 'Samsung S10', type:1, ownerId: 0, available: true },
+      { id: 12, serialNumber:'CC024675ZZ', description: 'Samsung Tablet', type:2, ownerId: 0, available: true },
+      { id: 13, serialNumber:'CC034675ZZ', description: 'Xiaomi Tablet', type:2, ownerId: 0, available: true },
+      { id: 14, serialNumber:'CC044675ZZ', description: 'Lenovo Thinkbook', type:3, ownerId: 0, available: true },
+      { id: 15, serialNumber:'CC054675ZZ', description: 'Lenovo Yoga', type:3, ownerId: 0, available: true },
     ];
 
     let employees = [
-      { id: 1, name: 'Grace Clemmitt', email: 'gclemmitt0@vk.com' },
-      { id: 2, name: 'Prentiss Hildrew', email: 'phildrew1@cbsnews.com' },
-      { id: 3, name: 'Nicol Kordovani', email: 'nkordovani2@ow.ly' },
-      { id: 4, name: 'Bentley Bolus', email: 'bbolus3@cnet.com' },
-      { id: 5, name: 'Marja Bywaters', email: 'mbywaters4@addtoany.com' },
-      { id: 6, name: 'Cord Klosterman', email: 'cklosterman5@mapy.cz' },
-      { id: 7, name: 'Lilias Willavoys', email: 'lwillavoys6@noaa.gov' },
-      { id: 8, name: 'Deck Baldree', email: 'dbaldree7@cdc.gov' },
-      { id: 9, name: 'Sybilla Lythgoe', email: 'slythgoe8@yahoo.co.jp' },
-      { id: 10, name: 'Reeba Tatlock', email: 'rtatlock9@xrea.com' },
-      { id: 11, name: 'Dorie Balden', email: 'dbaldena@joomla.org' },
+      { id: 1, name: 'Grace Clemmitt', email: 'gclemmitt0@vk.com', devices:[3, 6] },
+      { id: 2, name: 'Prentiss Hildrew', email: 'phildrew1@cbsnews.com', devices:[1, 10] },
+      { id: 3, name: 'Nicol Kordovani', email: 'nkordovani2@ow.ly', devices:[] },
+      { id: 4, name: 'Bentley Bolus', email: 'bbolus3@cnet.com', devices:[] },
+      { id: 5, name: 'Marja Bywaters', email: 'mbywaters4@addtoany.com', devices:[2] },
+      { id: 6, name: 'Cord Klosterman', email: 'cklosterman5@mapy.cz', devices:[4] },
+      { id: 7, name: 'Lilias Willavoys', email: 'lwillavoys6@noaa.gov', devices:[5] },
+      { id: 8, name: 'Deck Baldree', email: 'dbaldree7@cdc.gov', devices:[7] },
+      { id: 9, name: 'Sybilla Lythgoe', email: 'slythgoe8@yahoo.co.jp', devices:[8] },
+      { id: 10, name: 'Reeba Tatlock', email: 'rtatlock9@xrea.com', devices:[9] },
+      /*{ id: 11, name: 'Dorie Balden', email: 'dbaldena@joomla.org' },
       { id: 12, name: 'Aloysia Yates', email: 'ayatesb@yellowbook.com' },
       { id: 13, name: 'Theresa Schlag', email: 'tschlagc@sohu.com' },
       { id: 14, name: "Melantha O'Fielly", email: 'mofiellyd@hubpages.com' },
@@ -251,7 +255,7 @@ export class InMemoryDataService implements InMemoryDbService{
         email: 'fhackney5h@businessinsider.com',
       },
       { id: 199, name: 'Isobel Inglesant', email: 'iinglesant5i@netvibes.com' },
-      { id: 200, name: 'Ardath Bilham', email: 'abilham5j@topsy.com' },
+      { id: 200, name: 'Ardath Bilham', email: 'abilham5j@topsy.com' },*/
     ];
 
     return {devices, employees};

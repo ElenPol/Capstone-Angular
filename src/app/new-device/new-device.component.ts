@@ -15,7 +15,7 @@ export class NewDeviceComponent implements OnInit {
     type: ['', [Validators.required]],
     description: ['', [Validators.required]],
   });
-
+  private static devId = 11;
   constructor( private deviceService: DeviceService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
@@ -27,6 +27,7 @@ export class NewDeviceComponent implements OnInit {
     let description = this.form.value.description.trim();
     if (serialNumber!=='' && type!=='' && description!==''){
       const dev: Device = {
+        id: NewDeviceComponent.devId++,
         serialNumber: this.form.value.serialNumber,
         type: 0,
         description: this.form.value.description,
@@ -40,6 +41,7 @@ export class NewDeviceComponent implements OnInit {
         dev.type = 3;
       }
       this.deviceService.addDevice(dev).subscribe((device) => {
+        console.log(dev.id);
         this._snackBar.open('Device '+device.serialNumber+' was succesfully created!', 'X')
       });
     }else{
