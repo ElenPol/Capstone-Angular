@@ -61,11 +61,10 @@
   }
 
   .mat-raised-button{
-    float: left;
-    margin-left: 20px;
-  }
-
-.mat-raised-button .mat-primary{
-    float: right;
     margin-right: 20px;
+    margin-left: 20px;
+}
+
+  .mat-dialog-actions{
+    margin-left: 36%;
   }

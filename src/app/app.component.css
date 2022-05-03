@@ -34,3 +34,32 @@ h1{
     flex:auto;
 }
 
+.burger-menu{
+    visibility:hidden;
+    display: none;
+}
+
+@media screen and (max-width: 1250px) {
+    .toolbar-items {
+      visibility: hidden;
+      display: none;
+    }
+
+    .burger-menu{
+        visibility: visible;
+        display: block;
+        float:right;
+        margin-left: auto;
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+
+    .mat-button{
+        background-color: blueviolet;
+    }
+
+    .mat-icon{
+        color:blueviolet;
+    }
+
+  }
