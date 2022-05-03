@@ -38,12 +38,17 @@ export class EditDeviceDialogComponent implements OnInit {
   }
 
   save(){
+    let flag = false;
+    if (parseInt(this.form.value.ownerId) == 0){
+      flag = true;
+    }
     const dev: Device = {
       id: this.dev.id,
       serialNumber: this.dev.serialNumber,
       type: this.dev.type,
       description: this.form.value.description,
-      ownerId: parseInt(this.form.value.ownerId)
+      ownerId: parseInt(this.form.value.ownerId),
+      available: flag
     };
     
     this.dialogRef.close(dev);

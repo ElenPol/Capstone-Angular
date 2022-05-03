@@ -44,10 +44,10 @@ export class ViewDevicesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditDeviceDialogComponent, {
       data: {device: dev}, });
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(JSON.stringify(result));
       if (typeof result != 'undefined'){
         this.deviceService.updateDevice(result).subscribe(() => {
           this._snackBar.open('Device '+dev.serialNumber+' was succesfully updated!', 'X')
+          
         });
       }
     });
