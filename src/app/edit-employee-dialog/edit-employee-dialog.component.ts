@@ -29,7 +29,7 @@ export class EditEmployeeDialogComponent implements OnInit {
       id: this.empl.id,
       name: this.nameValue,
       email: this.emailValue,
-      devices: this.empl.devices
+      devicesId: this.empl.devicesId
     };
     
     this.dialogRef.close(empl);
