@@ -61,13 +61,13 @@ export class ViewEmployeesComponent implements OnInit {
       data: {flagConfDialog: false}, });
       dialogRef.afterClosed().subscribe(result => {
         //console.log(result);
-        let flag = result;
-        if (flag){
+        if (result){
           this.employeeService.deleteEmployee(empl.id).subscribe(() => {
             this._snackBar.open('Employee with id: '+empl.id+' was succesfully deleted!', 'X')
             this.deviceService.getDevicesOfEmployee(empl.id).subscribe((devices) => devices.forEach(d => {
                 d.ownerId = 0;
-                this.deviceService.updateDevice(d).subscribe(()=>console.log(d.ownerId));
+                d.available = true;
+                this.deviceService.updateDevice(d).subscribe(()=>console.log(d.ownerId, d.available));
             }));
           });
         }

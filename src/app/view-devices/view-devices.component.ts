@@ -7,6 +7,7 @@ import { Device } from '../device';
 import { iconMap } from '../device-icon';
 import { DeviceService } from '../device.service';
 import { EditDeviceDialogComponent } from '../edit-device-dialog/edit-device-dialog.component';
+import { EmployeeService } from '../employee.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ViewDevicesComponent implements OnInit {
   devices$!: Observable<Device[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(public deviceService: DeviceService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(private deviceService: DeviceService, private employeeService: EmployeeService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -64,8 +65,13 @@ export class ViewDevicesComponent implements OnInit {
         console.log(result);
         let flag = result;
         if (flag){
-          this.deviceService.deleteDevice(dev.id!).subscribe(() => {
+          this.deviceService.deleteDevice(dev.id).subscribe(() => {
             this._snackBar.open('Device '+dev.serialNumber+' was succesfully deleted!', 'X')
+            this.employeeService.getEmployees().subscribe(employees => 
+                employees.filter(e => e.devices.includes(dev.id)).forEach(e =>
+                      {e.devices.splice(e.devices.indexOf(dev.id), 1);
+                      this.employeeService.updateEmployee(e)}))
+              
           });
         }
       });
