@@ -60,7 +60,7 @@ export class EmplDevicesComponent implements OnInit {
     
     //update availiable devices information (those unassigned)
     let devicesNeedToBeUpdated: Device[] = [];
-    for (let d of this.employee.devices){
+    for (let d of this.employee.devicesId){
       this.availableDevices.filter(dev => dev.id==d).forEach(d => {devicesNeedToBeUpdated.push(d)});
     }
     //console.log(devicesNeedToBeUpdated);
@@ -69,7 +69,7 @@ export class EmplDevicesComponent implements OnInit {
                                          this.deviceService.updateDevice(dev).subscribe()});
 
     //update employee information
-    this.employee.devices = this.devicesOfEmployee.map(d => d.id);
+    this.employee.devicesId = this.devicesOfEmployee.map(d => d.id);
     this.employeeService.updateEmployee(this.employee).subscribe();
     this.dialogRef.close(this.employee);
   }

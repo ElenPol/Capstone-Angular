@@ -68,8 +68,8 @@ export class ViewDevicesComponent implements OnInit {
           this.deviceService.deleteDevice(dev.id).subscribe(() => {
             this._snackBar.open('Device '+dev.serialNumber+' was succesfully deleted!', 'X')
             this.employeeService.getEmployees().subscribe(employees => 
-                employees.filter(e => e.devices.includes(dev.id)).forEach(e =>
-                      {e.devices.splice(e.devices.indexOf(dev.id), 1);
+                employees.filter(e => e.devicesId.includes(dev.id)).forEach(e =>
+                      {e.devicesId.splice(e.devicesId.indexOf(dev.id), 1);
                       this.employeeService.updateEmployee(e)}))
               
           });
