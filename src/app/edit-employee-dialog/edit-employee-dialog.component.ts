@@ -10,6 +10,7 @@ import { Employee } from '../employee';
 })
 export class EditEmployeeDialogComponent implements OnInit {
   email = new FormControl('', [Validators.email]);
+  name = new FormControl('', [Validators.required]);
   emailValue: string;
   nameValue: string;
   empl:Employee;

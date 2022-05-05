@@ -18,11 +18,13 @@ import { EmployeeService } from '../employee.service';
 export class ViewDevicesComponent implements OnInit {
   devices$!: Observable<Device[]>;
   private searchTerms = new Subject<string>();
-
+  private localTerm: string = "";
+ 
   constructor(private deviceService: DeviceService, private employeeService: EmployeeService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   // Push a search term into the observable stream.
   search(term: string): void {
+    this.localTerm = term;
     term = term.trim();
     this.searchTerms.next(term);
   }
@@ -33,7 +35,7 @@ export class ViewDevicesComponent implements OnInit {
       debounceTime(300),
 
       // ignore new term if same as previous term
-      distinctUntilChanged(),
+      //distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.deviceService.searchDevices(term)),
@@ -45,6 +47,7 @@ export class ViewDevicesComponent implements OnInit {
       data: {device: dev}, });
     dialogRef.afterClosed().subscribe(result => {
       if (typeof result != 'undefined'){
+        this.searchTerms.next(this.localTerm);
         this.deviceService.updateDevice(result).subscribe(() => {
           this._snackBar.open('Device '+dev.serialNumber+' was succesfully updated!', 'X')
           
@@ -62,9 +65,8 @@ export class ViewDevicesComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       data: {flagConfDialog: false}, });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-        let flag = result;
-        if (flag){
+        if (result){
+          this.searchTerms.next(this.localTerm);
           this.deviceService.deleteDevice(dev.id).subscribe(() => {
             this._snackBar.open('Device '+dev.serialNumber+' was succesfully deleted!', 'X')
             this.employeeService.getEmployees().subscribe(employees => 

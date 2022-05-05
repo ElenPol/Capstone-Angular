@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Device } from '../device';
@@ -12,8 +12,8 @@ import { iconMap } from '../device-icon';
 })
 export class EditDeviceDialogComponent implements OnInit {
   form = this.formBuilder.group({
-    description: '',
-    ownerId: ''
+    description: ['', [Validators.required]],
+    ownerId: ['', [Validators.required]]
   });
   dev:Device;
   title: string;

@@ -263,11 +263,11 @@ export class InMemoryDataService implements InMemoryDbService{
 
      
     genId(employees: Employee[]): number {
-      return employees.length > 0 ? Math.max(...employees.map(empl => empl.id)) + 1 : 200;
+      return employees.length > 0 ? Math.max(...employees.map(empl => empl.id)) + 1 : 1;
     }
 
     genDeviceId(devices: Device[]): number {
-      return devices.length > 0 ? Math.max(...devices.map(dev => dev.id!)) + 1 : 200;
+      return devices.length > 0 ? Math.max(...devices.map(dev => dev.id!)) + 1 : 1;
     }
     
 }
