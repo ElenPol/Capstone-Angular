@@ -13,13 +13,14 @@ import { iconMap } from '../device-icon';
 export class EditDeviceDialogComponent implements OnInit {
   form = this.formBuilder.group({
     description: ['', [Validators.required]],
-    ownerId: ['', [Validators.required]]
+    ownerId: ''
   });
   dev:Device;
   title: string;
 
   constructor( private formBuilder: FormBuilder,  public dialogRef: MatDialogRef<EditDeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
+      this.form.get('ownerId')?.disable();
       this.dev = data.device;
       if (this.dev.type==1){
         this.title = 'Edit Smartphone';
