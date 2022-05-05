@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Device } from '../device';
-import { iconMap } from '../device-icon';
 
 @Component({
   selector: 'app-edit-device-dialog',
@@ -18,7 +17,7 @@ export class EditDeviceDialogComponent implements OnInit {
   dev:Device;
   title: string;
 
-  constructor( private formBuilder: FormBuilder,  public dialogRef: MatDialogRef<EditDeviceDialogComponent>,
+  constructor( private formBuilder: FormBuilder,  private _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EditDeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.form.get('ownerId')?.disable();
       this.dev = data.device;
@@ -39,27 +38,20 @@ export class EditDeviceDialogComponent implements OnInit {
   }
 
   save(){
-    let flag = false;
-    if (parseInt(this.form.value.ownerId) == 0){
-      flag = true;
-    }
-    const dev: Device = {
-      id: this.dev.id,
-      serialNumber: this.dev.serialNumber,
-      type: this.dev.type,
-      description: this.form.value.description,
-      ownerId: parseInt(this.form.value.ownerId),
-      available: flag
-    };
-    
-    this.dialogRef.close(dev);
-    
+    if (this.form.value.description.trim()!==''){
+      this.dev.description = this.form.value.description;
+      this.dialogRef.close(this.dev);
+    }else{
+      this._snackBar.open('You have to insert values for all the fields', 'X')
+    }    
   }
 
   close(){
     this.dialogRef.close();
   }
   
-  
+  getErrorMessageDescription() {
+    return 'You must enter a value';
+  }
 
 }

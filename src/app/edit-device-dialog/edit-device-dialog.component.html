@@ -5,7 +5,8 @@
   <mat-dialog-content [formGroup]="form">
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" ></textarea>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">{{getErrorMessageDescription()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Owner Id</mat-label>
