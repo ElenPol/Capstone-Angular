@@ -53,6 +53,7 @@ textarea.mat-input-element {
     background-color: white;
     width: 80px;
     margin: 5px;
+    margin-right: 25px;
 }
 
 .mat-card-buttons:hover{
@@ -65,7 +66,6 @@ textarea.mat-input-element {
 
 .button-wrapper{
     display: inline-grid;
-    margin-right: 25px;
 }
 
 .mat-card-sm-image {

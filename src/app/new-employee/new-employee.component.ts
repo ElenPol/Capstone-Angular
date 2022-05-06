@@ -12,7 +12,7 @@ import { EmployeeService } from '../employee.service';
 export class NewEmployeeComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required]);
-  idNum = 200;
+  private idNum = 201;
 
   constructor(private employeeService: EmployeeService, private _snackBar: MatSnackBar  ) { }
 
@@ -23,11 +23,11 @@ export class NewEmployeeComponent implements OnInit {
     name = name.trim();
     email = email.trim();
     if (name!=='' && email!=='' && !this.email.hasError('email')){
-      this.idNum++;
       const empl: Employee = {
-        id: this.idNum,
+        id: this.idNum++,
         name: name,
-        email: email
+        email: email,
+        devicesId: []
       };
       this.employeeService.addEmployee(empl).subscribe((employee) => {
         this._snackBar.open('Employee '+employee.name+' was succesfully created!', 'X')

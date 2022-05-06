@@ -1,14 +1,30 @@
 
-<div class="container">
-<h1>Devices of ...</h1>
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>Devices of {{employee.name}}</h2>
 
-<mat-card class="device-card">
-    <mat-card-title-group *ngFor="let dev of devices$ | async">
-      <mat-card-title *ngIf="dev.description">{{dev.description}}</mat-card-title>
-      <mat-card-subtitle >{{dev.serialNumber}}</mat-card-subtitle>
-      <mat-icon>{{getIcon(dev)}}</mat-icon>
-      <button mat-raised-button class="mat-card-buttons" routerLink="/...">Unassign</button>
-      
-    </mat-card-title-group>
-  </mat-card>
+    <div
+      cdkDropList
+      [cdkDropListData]= "devicesOfEmployee"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let dev of devicesOfEmployee" cdkDrag>{{dev.description}} <mat-icon>{{getIcon(dev)}}</mat-icon></div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Availiable Devices</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]= "availableDevices"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box"*ngFor="let dev of availableDevices" [cdkDragDisabled]="!dev.available" cdkDrag>{{dev.description}}<mat-icon>{{getIcon(dev)}}</mat-icon></div>
+    </div>
+  </div>
 </div>
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>

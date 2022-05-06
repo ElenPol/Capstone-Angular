@@ -13,6 +13,16 @@
       <a routerLink="/new-device" title="Create a new device">New Device</a>
       <a routerLink="/assign" title="Assign a device to an employee">Assign</a> 
      </div>
+     <div class="burger-menu">
+       <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/view-employees" title="Search an employee in order to watch details or to update it">Search Employee</button>
+          <button mat-menu-item routerLink="/view-devices" title="Search a device in order to watch details or to update it">Search Device</button>
+          <button mat-menu-item routerLink="/new-employee" title="Create a new employee">New Employee</button>
+          <button mat-menu-item routerLink="/new-device" title="Create a new device">New Device</button>
+          <button mat-menu-item routerLink="/assign" title="Assign a device to an employee">Assign</button> 
+        </mat-menu>
+      </div>
   </mat-toolbar>
 
   

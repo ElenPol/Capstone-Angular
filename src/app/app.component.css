@@ -34,3 +34,43 @@ h1{
     flex:auto;
 }
 
+.burger-menu{
+    visibility:hidden;
+    display: none;
+}
+
+@media screen and (max-width: 1250px) {
+    .toolbar-items {
+      visibility: hidden;
+      display: none;
+    }
+
+    .burger-menu{
+        visibility: visible;
+        display: block;
+        float:right;
+        margin-left: auto;
+        margin-right: 20px;
+        height: 100%;
+    }
+
+    .mat-button{
+        background-color: white;
+        height: 70%;
+        margin-top: 10px;
+    }
+
+    .mat-button:hover .mat-icon {
+        background-color: bisque;
+    }
+
+    .mat-button:hover, .mat-menu-item:hover{
+        background-color: bisque;
+    }
+
+    .mat-icon, .mat-menu-item{
+        background-color: white;
+        color:blueviolet;
+    }
+
+  }

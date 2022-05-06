@@ -1,7 +1,8 @@
 export interface Device {
-    id?: number;
+    id: number;
     serialNumber: string;
     description: string;
     type: number;
     ownerId: number;
+    available?: boolean;
 }

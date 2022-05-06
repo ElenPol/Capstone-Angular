@@ -5,16 +5,17 @@
   <mat-dialog-content [formGroup]="form">
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" ></textarea>
+          <textarea matInput formControlName="description" required></textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">{{getErrorMessageDescription()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Owner Id</mat-label>
-          <input matInput formControlName="ownerId"> 
+          <input matInput #ownerId formControlName="ownerId" > 
         </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-      <button class="mat-raised-button" mat-dialog-close>Close</button>
+      <button class="mat-raised-button" (click)="close()">Close</button>
       <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
   </mat-dialog-actions>
 </div>

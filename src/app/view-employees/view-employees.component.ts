@@ -8,6 +8,7 @@ import {
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { DeviceService } from '../device.service';
 import { EditEmployeeDialogComponent } from '../edit-employee-dialog/edit-employee-dialog.component';
+import { EmplDevicesComponent } from '../empl-devices/empl-devices.component';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee.service';
 
@@ -19,11 +20,13 @@ import { EmployeeService } from '../employee.service';
 export class ViewEmployeesComponent implements OnInit {
   employees$!: Observable<Employee[]>;
   private searchTerms = new Subject<string>();
+  private localTerm: string = "";
 
   constructor(private employeeService: EmployeeService, private  deviceService: DeviceService, private dialog: MatDialog, private _snackBar: MatSnackBar) {  }
 
   // Push a search term into the observable stream.
   search(term: string): void {
+    this.localTerm = term;
     term = term.trim();
     this.searchTerms.next(term);
   }
@@ -35,7 +38,7 @@ export class ViewEmployeesComponent implements OnInit {
       debounceTime(300),
 
       // ignore new term if same as previous term
-      distinctUntilChanged(),
+      //distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.employeeService.searchEmployees(term)),
@@ -46,9 +49,8 @@ export class ViewEmployeesComponent implements OnInit {
     const dialogRef = this.dialog.open(EditEmployeeDialogComponent, {
       data: {employee: empl}, });
       dialogRef.afterClosed().subscribe(result => {
-        //console.log('The dialog was closed');
-        console.log(JSON.stringify(result));
-        if (JSON.stringify(result).trim().length !== 0 ){
+        if (typeof result != 'undefined'){
+          this.searchTerms.next(this.localTerm);
           this.employeeService.updateEmployee(result).subscribe(() => {
             this._snackBar.open('Employee with id: '+empl.id+' was succesfully updated!', 'X')
           });
@@ -60,19 +62,30 @@ export class ViewEmployeesComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       data: {flagConfDialog: false}, });
       dialogRef.afterClosed().subscribe(result => {
-        //console.log(result);
-        let flag = result;
-        if (flag){
+        if (result){
+          this.searchTerms.next(this.localTerm);
           this.employeeService.deleteEmployee(empl.id).subscribe(() => {
             this._snackBar.open('Employee with id: '+empl.id+' was succesfully deleted!', 'X')
             this.deviceService.getDevicesOfEmployee(empl.id).subscribe((devices) => devices.forEach(d => {
                 d.ownerId = 0;
-                this.deviceService.updateDevice(d).subscribe(()=>console.log(d.ownerId));
+                d.available = true;
+                this.deviceService.updateDevice(d).subscribe(()=>console.log(d.ownerId, d.available));
             }));
           });
         }
       });
 
+  }
+
+  showDevices(empl: Employee){
+    const dialogRef = this.dialog.open(EmplDevicesComponent, {
+      data: {employee: empl}, });
+      dialogRef.afterClosed().subscribe(result => {
+        if (typeof result != 'undefined'){
+            this._snackBar.open('Assign to employee with id: '+result.id+'  was succesfully completed!', 'X')
+          };
+        }
+      );
   }
   
 
