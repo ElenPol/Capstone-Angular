@@ -50,15 +50,26 @@ h1{
         display: block;
         float:right;
         margin-left: auto;
-        margin-top: 10px;
         margin-right: 20px;
+        height: 100%;
     }
 
     .mat-button{
-        background-color: blueviolet;
+        background-color: white;
+        height: 70%;
+        margin-top: 10px;
     }
 
-    .mat-icon{
+    .mat-button:hover .mat-icon {
+        background-color: bisque;
+    }
+
+    .mat-button:hover, .mat-menu-item:hover{
+        background-color: bisque;
+    }
+
+    .mat-icon, .mat-menu-item{
+        background-color: white;
         color:blueviolet;
     }
 

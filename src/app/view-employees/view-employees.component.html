@@ -15,10 +15,11 @@
               <mat-card-subtitle *ngIf="empl.email">{{empl.email}}</mat-card-subtitle>
             </div>
             <div class="button-wrapper">
-              <button mat-raised-button class="mat-card-buttons" (click)="showDevices(empl)">Devices</button>
+              
               <button mat-raised-button class="mat-card-buttons" (click)="update(empl)">Update</button>
              <button mat-raised-button class="mat-card-buttons" (click)="delete(empl)">Delete</button>
             </div>
+            <button mat-raised-button class="mat-card-buttons" (click)="showDevices(empl)"><mat-icon>devices</mat-icon></button>
 
             <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
           </mat-card-title-group>

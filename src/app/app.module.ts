@@ -18,6 +18,7 @@ import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-de
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 
+import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
@@ -64,6 +65,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
       InMemoryDataService, { dataEncapsulation: false }
     ),
 
+    MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatInputModule,
